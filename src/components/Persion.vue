@@ -1,59 +1,36 @@
 <template>
-    <div class="persion">
-        <h2>name: {{ name }}</h2>
-        <h2>age: {{ age }}</h2>
-        <h2>tel: {{ tel }}</h2>
-        <button @click="ageChange">age++</button>
-    </div>
+  <div class="persion">
+    <h2>姓名：{{person.name}}</h2>
+    <h2>年龄：{{person.age}}</h2>
+    <h2>姓名：{{name}}</h2>
+    <h2>年龄：{{age}}</h2>
+    <h2>年龄2：{{age2}}</h2>
+    <button @click="changeName">修改姓名</button>
+    <button @click="changeAge">修改年龄</button>
+  </div>
 </template>
-<!-- <script lang="ts">
-export default {
-    name: "Persion",
-    //    data() {
-    //     return {
-    //         age: 11
-    //     }
-    //    },
-    //    methods:{
-    //     ageChange() {
-    //         this.age++
-    //     }
-    //    }
-    // setup的执行时机比vue2中的beforeUpdate还早
-    // setup() {
-    //     //数据
-    //     let name ='张三'
-    //     let age = 18
-    //     let tel = '183888888888'
-    //     //方法
-    //     function ageChange() {
-    //         return age += 1
-    //     }
-
-    //     return { name, age, tel, ageChange}
-
-    //     // return () => {
-    //     //     age += 1
-    //     //     return { name, age, tel}
-    //     // }
-    // }
-};
-</script> -->
-<script lang="ts" setup name="Persion234">
-    //数据
-    let name = "张三";
-    let age = 18;
-    let tel = "183888888888";
-    //方法
-    function ageChange() {
-        return (age += 1);
-    }
+<script lang="ts" setup name="Persion">
+import { reactive, toRefs, toRef } from "vue";
+let person = reactive({
+  name: '张三',
+  age: 18
+})
+let {name, age} = toRefs(person)
+let age2 = toRef(person,'age')
+function changeName(){
+  // person.name += '~'
+  name.value += '~'
+}
+function changeAge(){
+  // person.age += 1
+  age.value += 1
+}
 </script>
 <style>
 .persion {
-    background: skyblue;
-    box-shadow: 0 0 10px;
-    border-radius: 10px;
-    padding: 20px;
+  background: skyblue;
+  box-shadow: 0 0 10px;
+  border-radius: 10px;
+  padding: 20px;
 }
 </style>
